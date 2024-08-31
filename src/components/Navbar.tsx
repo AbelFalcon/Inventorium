@@ -11,21 +11,21 @@ export default function Component() {
       </Link>
       <div className="hidden md:flex gap-4">
         <Link
-          href="#"
+          href="/"
           className="text-lg font-medium hover:underline underline-offset-4"
           prefetch={false}
         >
           Inicio
         </Link>
         <Link
-          href="#"
+          href="/products"
           className="text-lg font-medium hover:underline underline-offset-4"
           prefetch={false}
         >
           Inventario
         </Link>
         <Link
-          href="#"
+          href="/products"
           className="text-lg font-medium hover:underline underline-offset-4"
           prefetch={false}
         >
