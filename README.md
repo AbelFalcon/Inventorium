@@ -1,0 +1,2 @@
+# Inventorium
+Product management panel
