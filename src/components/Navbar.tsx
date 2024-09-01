@@ -1,116 +1,38 @@
-import Link from "next/link"
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import Link from 'next/link'
+import { Home, Package, Settings, User } from 'lucide-react'
 
-export default function Component() {
+const Navbar = () => {
   return (
-    <div className="flex items-center justify-between px-4 py-2 bg-white dark:bg-gray-800">
-      <Link href="#" className="flex items-center gap-2" prefetch={false}>
-        <span className="text-lg font-semibold">Inventarium</span>
-      </Link>
-      <div className="hidden md:flex gap-4">
-        <Link
-          href="/"
-          className="text-lg font-medium hover:underline underline-offset-4"
-          prefetch={false}
-        >
-          Inicio
-        </Link>
-        <Link
-          href="/products"
-          className="text-lg font-medium hover:underline underline-offset-4"
-          prefetch={false}
-        >
-          Inventario
-        </Link>
-        <Link
-          href="/products"
-          className="text-lg font-medium hover:underline underline-offset-4"
-          prefetch={false}
-        >
-          Ajustes
-        </Link>
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-        </Avatar>
-      </div>
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="outline" size="icon" className="lg:hidden">
-            <MenuIcon className="h-6 w-6" />
-            <span className="sr-only"></span>
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left">
-          <div className="grid w-[200px] p-4">
-            <Link
-              href="#"
-              className="text-lg font-medium hover:underline underline-offset-4"
-              prefetch={false}
-            >
-              Inicio
+    <nav className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center">
+            <Link href="/" className="flex-shrink-0">
+              <span className="text-xl font-bold text-gray-800">Inventarium</span>
             </Link>
-            <Link
-              href="#"
-              className="text-lg font-medium hover:underline underline-offset-4"
-              prefetch={false}
-            >
-              Inventario
-            </Link>
-            <Link
-              href="#"
-              className="text-lg font-medium hover:underline underline-offset-4"
-              prefetch={false}
-            >
-              Ajustes
-            </Link>
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-            </Avatar>
           </div>
-        </SheetContent>
-      </Sheet>
-    </div>
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-4">
+              <NavItem href="/" icon={<Home className="w-4 h-4 mr-2" />} text="Inicio" />
+              <NavItem href="/products" icon={<Package className="w-4 h-4 mr-2" />} text="Productos" />
+              <NavItem href="/settings" icon={<Settings className="w-4 h-4 mr-2" />} text="Ajustes" />
+              <NavItem href="/profile" icon={<User className="w-4 h-4 mr-2" />} text="Perfil" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
   )
 }
 
-function MenuIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="4" x2="20" y1="12" y2="12" />
-      <line x1="4" x2="20" y1="6" y2="6" />
-      <line x1="4" x2="20" y1="18" y2="18" />
-    </svg>
-  )
-}
+const NavItem = ({ href, icon, text }: { href: string; icon: React.ReactNode; text: string }) => (
+  <Link
+    href={href}
+    className="text-gray-600 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium flex items-center transition duration-150 ease-in-out"
+  >
+    {icon}
+    {text}
+  </Link>
+)
 
-function MountainIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-    </svg>
-  )
-}
+export default Navbar

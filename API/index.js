@@ -1,11 +1,18 @@
 import express from "express"
 import { PrismaClient } from "@prisma/client"
+import cors from "cors"
 
 const prisma = new PrismaClient()
 const app = express()
 
-app.set("port", process.env.PORT || 3000)
+app.set("port", process.env.PORT || 4000)
 app.set("json spaces", 2)
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}))
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())

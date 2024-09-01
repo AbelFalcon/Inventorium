@@ -1,53 +1,29 @@
 import Navbar from "@/components/Navbar"
 import { DataTable } from "./data-table"
-import { columns, Payment } from "./columns"
-import { SwordsIcon } from "lucide-react"
+import { columns, Product } from "./columns"
 
-async function getData(): Promise<Payment[]> {
-  // Fetch data from your API here.
-  return [
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    // ...
-  ]
+async function getData(): Promise<Product[]> {
+  const res = await fetch("http://localhost:4000/v1/products")
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  const data = await res.json()
+  return data
 }
 
 export default async function Products() {
   const data = await getData()
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <div className="w-full max-w-4xl mx-auto p-4 mt-20">
-        <DataTable columns={columns} data={data} />
-      </div>
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-16">
+        <div className="space-y-6">
+          <h1 className="text-3xl font-bold text-gray-900">Productos</h1>
+          <div className="bg-white rounded-lg shadow">
+            <DataTable columns={columns} data={data} />
+          </div>
+        </div>
+      </main>
     </div>
   )
 }
