@@ -5,7 +5,8 @@ import { columns, Product } from "./columns"
 async function getData(): Promise<Product[]> {
   const res = await fetch("http://localhost:4000/v1/products")
   if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    console.log("Error fetching")
+    throw new Error("Failed to fetch data")
   }
   const data = await res.json()
   return data
